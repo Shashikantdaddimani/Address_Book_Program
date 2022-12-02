@@ -7,6 +7,7 @@ public class ContactPerson {
 	private String firstName, lastname, address, city, state, emailId;
 	private int zip;
 	private long mobileNumber;
+
 	/*
 	 * Adding getter and setter methods
 	 */
