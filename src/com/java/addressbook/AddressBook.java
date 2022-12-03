@@ -87,5 +87,25 @@ public class AddressBook {
 			System.out.println("Contact Doesn't exist.");
 		}
 	}
+	/*
+	 * method to delete the firstname
+	 */
+	public void deleteContact() {
+		System.out.println("Enter the First Name to Delete: ");
+		String FirstName = (input.next());
+		boolean IsAvaible = false;
+
+		for (ContactPerson contact : contactsArrayList) {
+			if (contact.getFirstName().equalsIgnoreCase(FirstName)) {
+				IsAvaible = true;
+				contactsArrayList.remove(contact);
+				System.out.println("!!Deleted!!");
+				break;
+			}
+		}
+		if (IsAvaible == false) {
+			System.out.println("Doesn't exist.");
+		}
+	}
 
 }
