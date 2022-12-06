@@ -17,37 +17,43 @@ public class AddressBookMain {
 		 * Declaring the object
 		 */
 		AddressBook adrressbook = new AddressBook();
-		int option;
 		/*
 		 * Taking user input using Scanner object
 		 */
 		Scanner input = new Scanner(System.in);
-		/*
-		 * switch to select the operations
-		 */
-		do {
-			System.out.println("1. ADD CONTACT \n2. DISPLAY CONTACTS \n3.EDIT CONTACT \n4 DELETE CONTACT \n");
-			System.out.println("Enter the operation number");
-			option = input.nextInt();
-
-			switch (option) {
+		int flag = 1;
+		while (flag == 1) {
+			System.out.println(" Welcome to address book program ");
+			System.out.println(" Select a choice : 1. Add 2.Edit  3. Delete 4. Exit");
+			int choice = input.nextInt();
+			switch (choice) {
 			case 1:
 				adrressbook.addContact();
 				break;
 			case 2:
-				adrressbook.showContct();
+				if (adrressbook.contactsArrayList.isEmpty()) {
+					System.out.println(" Address book is empty ");
+					break;
+				}
+				adrressbook.editContact();
 				break;
 			case 3:
-				adrressbook.editContact();
-			case 4:
+				if (adrressbook.contactsArrayList.isEmpty()) {
+					System.out.println(" Address book is empty ");
+					break;
+				}
 				adrressbook.deleteContact();
+			case 4:
+				flag = 0;
 				break;
+
 			default:
-				System.out.println("Wrong operation Entered");
+				System.out.println(" Enter a valid choice");
 				break;
 			}
+		}
+		System.out.println(adrressbook.contactsArrayList);
 
-		} while (option < 5);
 	}
 
 }
