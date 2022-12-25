@@ -5,17 +5,15 @@ package com.java.addressbook;
  */
 import java.util.*;
 
-
-
 /**
  * Class to create AddressBook with different methods
  */
 public class AddressBook {
 	/*
-	 * Taking user input using Scanner object
+	 * It represents a single diary where contact has been stored
 	 */
-	ArrayList<ContactPerson> list = new ArrayList<ContactPerson>();//// It represents a single diary where contact has been stored
-	String bookName; /// It represent the name of diary
+	ArrayList<ContactPerson> list = new ArrayList<ContactPerson>();
+	String bookName; // It represent the name of diary
 
 	void addContact() {
 		ContactPerson contact = new ContactPerson();
@@ -70,66 +68,71 @@ public class AddressBook {
 		}
 
 	}
-	
-	
+
 	public static void main(String[] args) {
-	        // TODO Auto-generated method stub
 
-	        System.out.println("Welcome to Address Book Program ");
+		System.out.println("Welcome to Address Book Program ");
 
-	        BookList shelf = new BookList();
+		BookList shelf = new BookList();
 
-	        while (true) {
-	            AddressBook addressBook = new AddressBook();
-	            Scanner scan3 = new Scanner(System.in);
-	            System.out.println("Enter the name of Book you want to  access or add or press 'q' to quit");
-	            String bookName = scan3.nextLine();
-	            if (bookName.equals("q")) {
-	                // if (addressBook.list.size() > 0) {
-	                // book.addBook(bookName, addressBook);
-	                // }
-	                System.out.println("The program is closed");
-	                break;
-	            }
-	            int result = shelf.checkBook(bookName);//// (It can return 0 or 1)It will return 1 if book exist b and break
-	            //// down loop
-	            int condition = 0;///// It will keep check on the addressbook created or not
-	            while (true) {
-	                if (result == 1) {
-	                    break;
-	                }
-	                System.out
-	                        .println("Do you want to add/edit/delete the contact (0/1/2) :Press 3 to Go back to main menu");
-	                Scanner scan = new Scanner(System.in);
-	                int input = scan.nextInt();
+		while (true) {
+			AddressBook addressBook = new AddressBook();
+			Scanner scan3 = new Scanner(System.in);
+			System.out.println(
+					"Enter the name of Book you want to  access or add  or type 'search' to search persons or press 'q' to quit");
+			String bookName = scan3.nextLine();
+			if (bookName.equals("q")) {
+				/*
+				 * if (addressBook.list.size() > 0) { book.addBook(bookName, addressBook);}
+				 */
+				System.out.println("The program is closed");
+				break;
+			} else if (bookName.equals("search")) {
+				Scanner input = new Scanner(System.in);
+				System.out.println("Enter the name of city or state you want to search :");
+				String placeName = input.nextLine();
+				shelf.showPersons(placeName);
+				continue;
+			}
+			/*
+			 * (It can return 0 or 1)It will return 1 if book exist b and breakdown loop
+			 */
+			int result = shelf.checkBook(bookName);
+			// It will keep check on the addressbook created or not
+			int condition = 0;
+			while (true) {
+				if (result == 1) {
+					break;
+				}
+				System.out
+						.println("Do you want to add/edit/delete the contact (0/1/2) :Press 3 to Go back to main menu");
+				Scanner scan = new Scanner(System.in);
+				int input = scan.nextInt();
 
-	                if (input == 0) {
+				if (input == 0) {
 
-	                    addressBook.addContact();
+					addressBook.addContact();
 
-	                } else if (input == 1) {
-	                    Scanner scan1 = new Scanner(System.in);
-	                    System.out.println("Enter the first name of person you to edit ");
-	                    String name = scan1.nextLine();
-	                    addressBook.editPerson(name, addressBook.list);
+				} else if (input == 1) {
+					Scanner scanner = new Scanner(System.in);
+					System.out.println("Enter the first name of person you to edit ");
+					String name = scanner.nextLine();
+					addressBook.editPerson(name, addressBook.list);
 
-	                } else if (input == 2) {
-	                    Scanner scan2 = new Scanner(System.in);
-	                    System.out.println("Enter the first name of the person you want to delete : ");
-	                    String name = scan2.nextLine();
-	                    addressBook.deletePerson(name, addressBook.list);
-	                }
+				} else if (input == 2) {
+					Scanner scanner = new Scanner(System.in);
+					System.out.println("Enter the first name of the person you want to delete : ");
+					String name = scanner.nextLine();
+					addressBook.deletePerson(name, addressBook.list);
+				} else if (input == 3) {
+					shelf.addBook(bookName, addressBook);
+					break;
+				} else {
+					System.out.println("Enter the valid command");
+				}
+			}
+		}
 
-	                else if (input == 3) {
-	                    shelf.addBook(bookName, addressBook);
-	                    break;
-	                }
-
-	                else {
-	                    System.out.println("Enter the valid command");
-	                }
-	            }
-	        }
-	    }
+	}
 
 }
