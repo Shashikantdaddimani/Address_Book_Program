@@ -5,6 +5,8 @@ package com.java.addressbook;
  */
 import java.util.*;
 
+
+
 /**
  * Class to create AddressBook with different methods
  */
@@ -12,134 +14,122 @@ public class AddressBook {
 	/*
 	 * Taking user input using Scanner object
 	 */
-	static Scanner input = new Scanner(System.in);
-	static ArrayList<ContactPerson> adressBook = new ArrayList<ContactPerson>();
-	static ContactPerson addressBoook = new ContactPerson();
+	ArrayList<ContactPerson> list = new ArrayList<ContactPerson>();//// It represents a single diary where contact has been stored
+	String bookName; /// It represent the name of diary
 
-	/*
-	 * Method Nmae
-	 */
-	public void addContactPersonDetails() {
-		ContactPerson details = new ContactPerson();
+	void addContact() {
+		ContactPerson contact = new ContactPerson();
+		contact.addContact();
+		boolean duplicateContact = list.stream().anyMatch(x -> x.firstName.equals(contact.firstName));
+		if (duplicateContact == true) {
+			System.out.println("It is a duplicate contact.");
+			return;
+		} else {
+			list.add(contact);
+			System.out.println("Contact added successfully");
+		}
 
-		System.out.println("Enter a first name:");
-		String firstName = input.next();
-		details.setFirstName(input.next());
-		System.out.println("Enter a last name:");
-		String lastName = input.next();
-		details.setLastName(input.next());
-		System.out.println("Enter a Address:");
-		String address = input.next();
-		details.setAddress(input.next());
-		System.out.println("Enter a City name:");
-		String city = input.next();
-		details.setCity(input.next());
-		System.out.println("Enter a state:");
-		String state = input.next();
-		details.setState(input.next());
-		System.out.println("Enter a email:");
-		String email = input.next();
-		details.setEmail(input.next());
-		System.out.println("Enter a zip code:");
-		String zip = input.next();
-		details.setZipCode(input.next());
-		System.out.println("Enter a phone number:");
-		String phoneNumber = input.next();
-		details.setMobileNumber(input.next());
-
-		adressBook.add(details);
-		ContactPerson details1 = new ContactPerson(firstName, lastName, address, city, state, email, zip, phoneNumber);
-		adressBook.add(details1);
-		System.out.print(adressBook);
-		System.out.println("succesfully added person new ContactPersons");
 	}
 
-	/*
-	 * Edit ContactPerson Deatils method using SwitchCase
-	 */
-	public void editContactPersonDetails() {
-		System.out.println("enter a name for edit:");
-		String editName = input.next();
-		for (int i = 0; i < adressBook.size(); i++) {
-			if (adressBook.get(i).getFirstName().equals(editName)) {
-				System.out.println("select options");
-				System.out.println(
-						"\n1.First Name\n2.Last Name\n3.Address\n4.City\n5.State\n6.Zip\n7.Phone Number\n8.Email");
-				int editOption = input.nextInt();
-
-				switch (editOption) {
-				case 1:
-					System.out.println("enter 1 for add firstName");
-					System.out.println("Enter a First name:");
-					String editFirstName = input.next();
-					adressBook.get(i).setFirstName(editFirstName);
-					System.out.println(editFirstName);
+	void deletePerson(String name, ArrayList<ContactPerson> list) {
+		if (list.size() == 0) {
+			System.out.println("Address book is empty.Please Add First");
+		} else {
+			int m = 0;
+			for (int i = list.size() - 1; i >= 0; --i) {
+				if (list.get(i).firstName.contains(name)) {
+					list.remove(i);
+					System.out.println("Contact deleted successfully");
+					m += 1;
 					break;
-				case 2:
-					System.out.println("enter 2 for add LastName");
-					System.out.print("Enter a Last name:");
-					adressBook.get(i).setLastName(input.next());
-					break;
-				case 3:
-					System.out.print("Enter a Address:");
-					adressBook.get(i).setAddress(input.next());
-					break;
-				case 4:
-					System.out.print("Enter a city:");
-					adressBook.get(i).setCity(input.next());
-					break;
-				case 5:
-					System.out.print("Enter a state:");
-					adressBook.get(i).setState(input.next());
-					break;
-				case 6:
-					System.out.print("Enter a zip code:");
-					adressBook.get(i).setZipCode(input.next());
-					break;
-				case 7:
-					System.out.print("Enter a phone number:");
-					adressBook.get(i).setMobileNumber(input.next());
-					break;
-				case 8:
-					System.out.print("Enter a email:");
-					adressBook.get(i).setEmail(input.next());
-					break;
-				default:
-					System.out.println("enter valid ContactPerson");
 				}
 			}
-			System.out.println("Edited list is:");
-			System.out.println(adressBook);
+			if (m == 0) {
+				System.out.println("No contact with the given name exist");
+			}
 		}
+
 	}
 
-	/*
-	 * Delete ContactPerson Method for person address book
-	 */
-	public void deleteContactPerson() {
-		System.out.println("confirm the name to delete ContactPerson");
-		String confirmName = input.next();
-		for (int i = 0; i < adressBook.size(); i++) {
-			if (adressBook.get(i).getFirstName().equalsIgnoreCase(confirmName))
-				;
-			ContactPerson person = adressBook.get(i);
-			adressBook.remove(person);
+	void editPerson(String name, ArrayList<ContactPerson> list) {
+		if (list.size() == 0) {
+			System.out.println("Addressbook is empty.Please add First");
+		} else {
+			int m = 0;
+			for (int i = list.size() - 1; i >= 0; --i) {
+				if (list.get(i).firstName.contains(name)) {
+					list.get(i).addContact();
+					System.out.println("Contact Updated successfully");
+					m += 1;
+					break;
+				}
+			}
+			if (m == 0) {
+				System.out.println("No contact with the given name exist");
+			}
 		}
-		System.out.println(adressBook);
-	}
 
-	/*
-	 * Method Name:Disply(); logic for Display the address book
-	 */
-	public void display() {
-		for (int i = 0; i < adressBook.size(); i++) {
-			ContactPerson person = adressBook.get(i);
-			System.out.println("FirstName" + ":=" + person.getFirstName() + "\n" + "lastname" + ":= "
-					+ person.getLastName() + "\n" + "Address" + ":= " + person.getAddress() + "\n" + "City" + ":= "
-					+ person.getCity() + "\n" + "State" + ":=" + person.getState() + "\n" + "Zip" + ":= "
-					+ person.getZipCode() + "\n" + "PhoneNumber" + ":= " + person.getMobileNumber() + "\n" + "Email"
-					+ ":= " + person.getEmail());
-		}
 	}
+	
+	
+	public static void main(String[] args) {
+	        // TODO Auto-generated method stub
+
+	        System.out.println("Welcome to Address Book Program ");
+
+	        BookList shelf = new BookList();
+
+	        while (true) {
+	            AddressBook addressBook = new AddressBook();
+	            Scanner scan3 = new Scanner(System.in);
+	            System.out.println("Enter the name of Book you want to  access or add or press 'q' to quit");
+	            String bookName = scan3.nextLine();
+	            if (bookName.equals("q")) {
+	                // if (addressBook.list.size() > 0) {
+	                // book.addBook(bookName, addressBook);
+	                // }
+	                System.out.println("The program is closed");
+	                break;
+	            }
+	            int result = shelf.checkBook(bookName);//// (It can return 0 or 1)It will return 1 if book exist b and break
+	            //// down loop
+	            int condition = 0;///// It will keep check on the addressbook created or not
+	            while (true) {
+	                if (result == 1) {
+	                    break;
+	                }
+	                System.out
+	                        .println("Do you want to add/edit/delete the contact (0/1/2) :Press 3 to Go back to main menu");
+	                Scanner scan = new Scanner(System.in);
+	                int input = scan.nextInt();
+
+	                if (input == 0) {
+
+	                    addressBook.addContact();
+
+	                } else if (input == 1) {
+	                    Scanner scan1 = new Scanner(System.in);
+	                    System.out.println("Enter the first name of person you to edit ");
+	                    String name = scan1.nextLine();
+	                    addressBook.editPerson(name, addressBook.list);
+
+	                } else if (input == 2) {
+	                    Scanner scan2 = new Scanner(System.in);
+	                    System.out.println("Enter the first name of the person you want to delete : ");
+	                    String name = scan2.nextLine();
+	                    addressBook.deletePerson(name, addressBook.list);
+	                }
+
+	                else if (input == 3) {
+	                    shelf.addBook(bookName, addressBook);
+	                    break;
+	                }
+
+	                else {
+	                    System.out.println("Enter the valid command");
+	                }
+	            }
+	        }
+	    }
 
 }

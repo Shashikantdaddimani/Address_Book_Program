@@ -1,5 +1,7 @@
 package com.java.addressbook;
 
+import java.util.Scanner;
+
 /**
  * Class to create ContactPerson with different methods
  * 
@@ -8,109 +10,34 @@ public class ContactPerson {
 	/*
 	 * Variable Declaration
 	 */
-	private String firstName;
-	private String lastName;
-	private String address;
-	private String city;
-	private String state;
-	private String zipCode;
-	private String mobileNumber;
-	private String email;
+	 String firstName;
+	    String lastName;
+	    String address;
+	    String city;
+	    String state;
 
-	/*
-	 * Parameterized Constructor
-	 */
-	public ContactPerson(String firstName, String lastName, String address, String city, String state, String zip,
-			String phoneNumber, String email) {
-		this.setFirstName(firstName);
-		this.setLastName(lastName);
-		this.setAddress(address);
-		this.setCity(city);
-		this.setState(state);
-		this.setZipCode(zip);
-		this.setMobileNumber(phoneNumber);
-		this.setEmail(email);
-	}
+	    String phoneNumber;
+	    String email;
+	    String zip;
 
-	/*
-	 * Default Constructor
-	 */
-	public ContactPerson() {
-	}
-
-	// creating getter and setter methods
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public String getZipCode() {
-		return zipCode;
-	}
-
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
-	}
-
-	public String getMobileNumber() {
-		return mobileNumber;
-	}
-
-	public void setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	/*
-	 * toString method to represent the String of Object
-	 */
-	@Override
-	public String toString() {
-		return "Contact [firstName=" + firstName + ", lastName=" + lastName + ", adddress=" + address + ", city=" + city
-				+ ", state=" + state + ", zipCode=" + zipCode + ", mobileNumber=" + mobileNumber + ", email=" + email
-				+ "]";
-	}
+	    void addContact() {
+	        Scanner scan=new Scanner(System.in);
+	        System.out.println("First Name :");
+	        this.firstName = scan.nextLine();
+	        System.out.println("Last Name :");
+	        this.lastName = scan.nextLine();
+	        System.out.println("Enter the address :");
+	        this.address = scan.nextLine();
+	        System.out.println("Enter city : ");
+	        this.city = scan.nextLine();
+	        System.out.println("Enter state : ");
+	        this.state = scan.nextLine();
+	        System.out.println("Enter Phone Number : ");
+	        this.phoneNumber = scan.nextLine();
+	        System.out.println("Enter Email : ");
+	        this.email = scan.nextLine();
+	        System.out.println("Enter zip : ");
+	        this.zip = scan.nextLine();
+	    }
 
 }
