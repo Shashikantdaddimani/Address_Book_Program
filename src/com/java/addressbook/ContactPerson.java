@@ -18,7 +18,9 @@ public class ContactPerson {
 	String phoneNumber;
 	String email;
 	String zip;
-
+	/*
+	 * constructor 
+	 */
 	public ContactPerson() {
 		super();
 		this.firstName = firstName;
@@ -30,7 +32,9 @@ public class ContactPerson {
 		this.email = email;
 		this.zip = zip;
 	}
-	
+	/*
+	 * method for adding the contact details
+	 */
 	void addContact() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("First Name :");
